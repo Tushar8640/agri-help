@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  name          String
+  email         String    @unique
+  password      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  projects      Project[]
+}
+
+model Project {
+  id                  Int       @id @default(autoincrement())
+  name                String
+  description         String?
+  landArea            Float     // in hectares
+  startDate           DateTime
+  expectedHarvestDate DateTime
+  targetSellPrice     Float     // per unit
+  expectedYield       Float     // expected total harvest in units
+  status              String    @default("planning") // planning, in_progress, harvested, sold
+  userId              Int
+  user                User      @relation(fields: [userId], references: [id])
+  costs               Cost[]
+  crops               Crop[]
+  harvests            Harvest[]
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+}
+
+model Cost {
+  id          Int       @id @default(autoincrement())
+  name        String
+  amount      Float
+  category    String    // seeds, fertilizer, labor, equipment, other
+  date        DateTime
+  description String?
+  projectId   Int
+  project     Project   @relation(fields: [projectId], references: [id])
+  createdAt   DateTime  @default(now())
+}
+
+model Crop {
+  id          Int       @id @default(autoincrement())
+  name        String
+  variety     String?
+  plantingDate DateTime
+  area        Float     // area allocated for this crop in hectares
+  projectId   Int
+  project     Project   @relation(fields: [projectId], references: [id])
+  createdAt   DateTime  @default(now())
+}
+
+model Harvest {
+  id          Int       @id @default(autoincrement())
+  date        DateTime
+  yield       Float     // actual harvested amount in units
+  quality     String?   // good, average, poor
+  price       Float?    // actual selling price per unit
+  projectId   Int
+  project     Project   @relation(fields: [projectId], references: [id])
+  createdAt   DateTime  @default(now())
+}
