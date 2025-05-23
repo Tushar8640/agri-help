@@ -133,6 +133,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div className="flex items-center justify-around h-16">
               {navItems.map((item) => (
                 <Link
+                  onClick={() => setIsSidebarOpen(false)}
                   key={item.path}
                   href={item.path}
                   className={`flex flex-col items-center justify-center p-2 ${pathname === item.path
@@ -150,9 +151,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         {/* Floating action button */}
         {isMobile && (
-          <Button className="fixed right-6 bottom-20 p-4 bg-green-700 text-white rounded-full shadow-lg hover:bg-green-800 transition-colors z-20">
-            <Plus className="w-6 h-6" />
-          </Button>
+          <Link href="/projects/new" className='fixed right-6 bottom-20'>
+            <Button size={'icon'} variant={'outline'} className="rounded-full ">
+              <Plus className='w-8 h-8'></Plus>
+            </Button>
+          </Link>
         )}
       </div>
     </div>

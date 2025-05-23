@@ -29,13 +29,8 @@ export default async function ProjectsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Your Agricultural Projects</h1>
-        <Link href="/projects/new" >
-          <Button size={"sm"} variant={'outline'} className="">
-            <Plus className='w-5 h-5 mr-2'></Plus> New Project
-          </Button>
-        </Link>
+      <div className="flex flex-col lg:flow-root justify-between items-center mb-8 space-y-5 lg:space-y-0">
+        <h1 className="text-xl lg:text-3xl font-bold">Your Agricultural Projects</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
