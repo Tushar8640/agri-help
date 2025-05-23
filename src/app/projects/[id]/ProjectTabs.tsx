@@ -21,7 +21,7 @@ export default function ProjectTabs({
   const [activeTab, setActiveTab] = useState('costs')
 
   return (
-    <div className="bg-white rounded shadow grid grid-cols-2">
+    <div className="bg-white rounded shadow grid grid-cols-1 gap-3 lg:grid-cols-2">
       <div className="border-b border-gray-200">
         <nav className="flex -mb-px">
           <Button
