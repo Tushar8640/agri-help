@@ -5,14 +5,11 @@ import {
   Calendar, Ruler, DollarSign, BarChart3, 
   ChevronRight, CloudRain, AlertTriangle
 } from 'lucide-react';
-import { Project } from '../../../agri/project/src/context/ProjectContext';
+
 import Link from 'next/link';
 
-interface ProjectCardProps {
-  project: Project;
-}
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard = ({ project }) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Planning': return 'bg-blue-100 text-blue-800';

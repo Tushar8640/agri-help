@@ -1,13 +1,8 @@
 import React from 'react';
 import { Calendar, MapPin, ChevronRight } from 'lucide-react';
-import { Project } from '../../../agri/project/src/context/ProjectContext';
 import Link from 'next/link';
 
-interface ProjectListItemProps {
-  project: Project;
-}
-
-const ProjectListItem: React.FC<ProjectListItemProps> = ({ project }) => {
+const ProjectListItem = ({ project }) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Planning': return 'bg-blue-100 text-blue-800';

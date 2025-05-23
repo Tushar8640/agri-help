@@ -1,11 +1,7 @@
 import React from 'react';
-import { Project } from '../../../agri/project/src/context/ProjectContext';
 
-interface ProjectsTimelineProps {
-  projects: Project[];
-}
 
-const ProjectsTimeline: React.FC<ProjectsTimelineProps> = ({ projects }) => {
+const ProjectsTimeline= ({ projects }) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Planning': return 'bg-blue-500';
@@ -30,7 +26,7 @@ const ProjectsTimeline: React.FC<ProjectsTimelineProps> = ({ projects }) => {
   };
   
   // Calculate project bar position and width
-  const calculateBarStyles = (project: Project) => {
+  const calculateBarStyles = (project) => {
     const start = new Date(project.startDate).getTime();
     const end = project.endDate 
       ? new Date(project.endDate).getTime() 
