@@ -129,7 +129,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         {/* Bottom mobile nav */}
         {isMobile && (
-          <div className="md:hidden fixed bottom-0 inset-x-0 z-10 w-[200px] mx-auto rounded">
+          <div className="md:hidden fixed bottom-0 inset-x-0 z-10 w-[200px] mx-auto rounded bg-white">
             <div className="flex items-center justify-around h-16">
               {navItems.map((item) => (
                 <Link
