@@ -3,6 +3,33 @@
 import { prisma } from "@/lib/prisma"
 
 
+export const getProjectDetails = async (id: string) => {
+    try {
+        const response = await prisma.project.findUnique({
+            where: { id: parseInt(id) },
+            include: {
+                costs: {
+                    orderBy: { date: 'desc' },
+                },
+                crops: {
+                    orderBy: { plantingDate: 'desc' },
+                },
+                harvests: {
+                    orderBy: { date: 'desc' },
+                },
+            },
+        })
+
+        console.log("error response", response)
+        if (response) {
+            return response
+        } else {
+            console.log('failed to create project', response)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
 export const getProjects = async () => {
     try {
         const response = await prisma.project.findMany({

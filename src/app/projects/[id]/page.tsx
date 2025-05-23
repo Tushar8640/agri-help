@@ -1,9 +1,8 @@
 import { format } from 'date-fns'
 import Link from 'next/link'
 import ProjectTabs from './ProjectTabs'
+import { getProjectDetails } from '@/app/actions/projects'
 
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
 
 export default async function ProjectDetailPage({
   params,
@@ -12,20 +11,7 @@ export default async function ProjectDetailPage({
 }) {
   const { id } = await params
 
-  const project = await prisma.project.findUnique({
-    where: { id: parseInt(id) },
-    include: {
-      costs: {
-        orderBy: { date: 'desc' },
-      },
-      crops: {
-        orderBy: { plantingDate: 'desc' },
-      },
-      harvests: {
-        orderBy: { date: 'desc' },
-      },
-    },
-  })
+  const project = await getProjectDetails(id)
 
   if (!project) {
     return <div>Project not found</div>
