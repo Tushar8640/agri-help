@@ -38,8 +38,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navItems = [
     { path: '/', label: 'Dashboard', icon: <Home className="w-5 h-5" /> },
     { path: '/projects', label: 'Projects', icon: <Tractor className="w-5 h-5" /> },
-    { path: '/reports', label: 'Reports', icon: <BarChart3 className="w-5 h-5" /> },
-    { path: '/profile', label: 'Profile', icon: <User className="w-5 h-5" /> },
+    // { path: '/reports', label: 'Reports', icon: <BarChart3 className="w-5 h-5" /> },
+    // { path: '/profile', label: 'Profile', icon: <User className="w-5 h-5" /> },
   ];
 
   const getPageTitle = () => {
@@ -80,11 +80,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Link
               key={item.path}
               href={item.path}
-              className={`flex items-center px-4 py-3 rounded-md transition-colors ${
-                pathname === item.path
-                  ? 'bg-green-100 text-green-800'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
+              className={`flex items-center px-4 py-3 rounded-md transition-colors ${pathname === item.path
+                ? 'bg-green-100 text-green-800'
+                : 'text-gray-700 hover:bg-gray-100'
+                }`}
             >
               {item.icon}
               <span className="ml-3">{item.label}</span>
@@ -94,7 +93,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </aside>
 
       {/* Main content area */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden pb-8">
         {/* Top navbar */}
         <header className="bg-white border-b border-gray-200 shadow-sm">
           <div className="flex items-center justify-between h-16 px-4">
@@ -130,17 +129,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         {/* Bottom mobile nav */}
         {isMobile && (
-          <div className="md:hidden fixed bottom-0 inset-x-0 bg-white border-t border-gray-200 shadow-lg z-10">
+          <div className="md:hidden fixed bottom-0 inset-x-0 z-10 w-[200px] mx-auto rounded">
             <div className="flex items-center justify-around h-16">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   href={item.path}
-                  className={`flex flex-col items-center justify-center p-2 ${
-                    pathname === item.path
-                      ? 'text-green-700'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
+                  className={`flex flex-col items-center justify-center p-2 ${pathname === item.path
+                    ? 'text-green-700'
+                    : 'text-gray-600 hover:text-gray-900'
+                    }`}
                 >
                   {item.icon}
                   <span className="text-xs mt-1">{item.label}</span>

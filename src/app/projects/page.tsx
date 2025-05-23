@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { format } from 'date-fns'
 import { getProjects } from '../actions/projects'
 import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode } from 'react'
+import { Button } from '@/components/ui/button'
+import { Plus } from 'lucide-react'
 
 
 export default async function ProjectsPage() {
@@ -29,8 +31,10 @@ export default async function ProjectsPage() {
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Your Agricultural Projects</h1>
-        <Link href="/projects/new" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-          Add New Project
+        <Link href="/projects/new" >
+          <Button size={"sm"} variant={'outline'} className="">
+            <Plus className='w-5 h-5 mr-2'></Plus> New Project
+          </Button>
         </Link>
       </div>
 
