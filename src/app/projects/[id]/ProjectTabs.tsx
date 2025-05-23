@@ -21,37 +21,60 @@ export default function ProjectTabs({
   const [activeTab, setActiveTab] = useState('costs')
 
   return (
-    <div className="bg-white rounded shadow">
+    <div className="bg-white rounded shadow grid grid-cols-2">
       <div className="border-b border-gray-200">
         <nav className="flex -mb-px">
           <Button
+            variant={'ghost'}
             onClick={() => setActiveTab('costs')}
             className={`py-4 px-6 text-center border-b-2 font-medium text-sm ${activeTab === 'costs' ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
           >
             Costs
           </Button>
           <Button
+            variant={'ghost'}
             onClick={() => setActiveTab('crops')}
             className={`py-4 px-6 text-center border-b-2 font-medium text-sm ${activeTab === 'crops' ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
           >
             Crops
           </Button>
           <Button
+            variant={'ghost'}
             onClick={() => setActiveTab('harvests')}
             className={`py-4 px-6 text-center border-b-2 font-medium text-sm ${activeTab === 'harvests' ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
           >
             Harvests
           </Button>
         </nav>
+        <div className="p-4">
+          {activeTab === 'costs' && (
+            <div>
+              <AddCostForm projectId={project.id} />
+            </div>
+          )}
+
+          {activeTab === 'crops' && (
+            <div>
+              <AddCropForm projectId={project.id} />
+            </div>
+          )}
+
+          {activeTab === 'harvests' && (
+            <div>
+              <AddHarvestForm projectId={project.id} />
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="p-4">
+
+
+      <div className="p-4 pt-16">
         {activeTab === 'costs' && (
           <div>
-            <AddCostForm projectId={project.id} />
             <div className="mt-4">
               <h3 className="font-medium mb-2 text-black">Cost History</h3>
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto border rounded">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
@@ -87,10 +110,9 @@ export default function ProjectTabs({
 
         {activeTab === 'crops' && (
           <div>
-            <AddCropForm projectId={project.id} />
             <div className="mt-4">
               <h3 className="font-medium mb-2 text-black">Crops Planted</h3>
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto  border rounded">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
@@ -126,10 +148,9 @@ export default function ProjectTabs({
 
         {activeTab === 'harvests' && (
           <div>
-            <AddHarvestForm projectId={project.id} />
             <div className="mt-4">
               <h3 className="font-medium mb-2 text-black">Harvest Records</h3>
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto  border rounded">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="">
                     <tr>
