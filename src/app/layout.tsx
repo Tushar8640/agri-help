@@ -3,6 +3,7 @@ import "./globals.css";
 import { ProjectProvider } from "@/context/ProjectContext";
 import { WeatherProvider } from "@/context/WeatherContext";
 import Layout from "@/components/Layout";
+import ServiceWorkerRegistration from "./pwa";
 
 export const metadata: Metadata = {
   title: 'Agri Tech',
@@ -44,6 +45,7 @@ export default function RootLayout({
         <ProjectProvider>
           <WeatherProvider>
             <Layout>{children}</Layout>
+            <ServiceWorkerRegistration />
           </WeatherProvider>
         </ProjectProvider>
       </body>

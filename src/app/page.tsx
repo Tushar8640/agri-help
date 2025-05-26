@@ -2,9 +2,9 @@
 
 import React from 'react';
 
-import { 
-  BarChart3, Tractor, DollarSign, LineChart, CalendarRange, 
-  Sprout, CloudRain, ArrowUpRight, AlertTriangle 
+import {
+  BarChart3, Tractor, DollarSign, LineChart, CalendarRange,
+  Sprout, CloudRain, ArrowUpRight, AlertTriangle
 } from 'lucide-react';
 import StatCard from '../components/StatCard';
 import WeatherWidget from '../components/WeatherWidget';
@@ -16,11 +16,13 @@ import { useProjects } from '@/context/ProjectContext';
 import { useWeather } from '@/context/WeatherContext';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { InstallPrompt, PushNotificationManager, PWAStatus } from '@/components/PwaComponents';
+import { InstallButton } from '@/components/InstallPwa';
 
 const Dashboard: React.FC = () => {
   const { projects, expenses, loading } = useProjects();
   const { weather, loading: weatherLoading } = useWeather();
-  
+
   if (loading || weatherLoading) {
     return (
       <div className="flex items-center justify-center h-full">
@@ -34,7 +36,7 @@ const Dashboard: React.FC = () => {
   const totalBudget = projects.reduce((sum, project) => sum + project.budget, 0);
   const totalExpenses = projects.reduce((sum, project) => sum + project.expenses, 0);
   const completedProjects = projects.filter(p => p.status === 'Harvested').length;
-  
+
   // Calculate expenses by category
   const expenseCategories = {
     Seeds: 0,
@@ -44,7 +46,7 @@ const Dashboard: React.FC = () => {
     Equipment: 0,
     Other: 0
   };
-  
+
   expenses.forEach(expense => {
     expenseCategories[expense.category] += expense.amount;
   });
@@ -55,29 +57,39 @@ const Dashboard: React.FC = () => {
   return (
     <div className="pb-20 md:pb-6">
       {/* Stats Overview */}
+      <h1 className="text-3xl font-bold text-center mb-8">My PWA App</h1>
+      <InstallButton />
+
+      <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
+        <InstallPrompt />
+        <PWAStatus />
+        <InstallPrompt />
+      </div>
+
+      <PushNotificationManager />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <StatCard 
+        <StatCard
           title="Active Projects"
           value={activeProjects.toString()}
           icon={<Tractor className="w-5 h-5 text-green-700" />}
           change="+2 this month"
           trend="up"
         />
-        <StatCard 
+        <StatCard
           title="Total Budget"
           value={`$${totalBudget.toLocaleString()}`}
           icon={<DollarSign className="w-5 h-5 text-green-700" />}
           change="15% allocated"
           trend="neutral"
         />
-        <StatCard 
+        <StatCard
           title="Total Expenses"
           value={`$${totalExpenses.toLocaleString()}`}
           icon={<BarChart3 className="w-5 h-5 text-amber-600" />}
           change={`${Math.round((totalExpenses / totalBudget) * 100)}% of budget`}
           trend={totalExpenses > totalBudget * 0.8 ? "down" : "up"}
         />
-        <StatCard 
+        <StatCard
           title="Completed Projects"
           value={completedProjects.toString()}
           icon={<Sprout className="w-5 h-5 text-green-700" />}
@@ -99,7 +111,7 @@ const Dashboard: React.FC = () => {
             </div>
             <ProjectProgressChart projects={projects} />
           </div>
-          
+
           {/* Charts Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
@@ -111,7 +123,7 @@ const Dashboard: React.FC = () => {
               <YieldForecast projects={projects} />
             </div>
           </div>
-          
+
           {/* Projects Timeline */}
           <div className="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
             <div className="flex items-center justify-between mb-4">
@@ -124,7 +136,7 @@ const Dashboard: React.FC = () => {
             <ProjectsTimeline projects={projects} />
           </div>
         </div>
-        
+
         {/* Sidebar Column */}
         <div className="space-y-6">
           {/* Weather Widget */}
@@ -135,7 +147,7 @@ const Dashboard: React.FC = () => {
             </div>
             <WeatherWidget weather={weather} />
           </div>
-          
+
           {/* Risk Alerts */}
           {highRiskProjects.length > 0 && (
             <div className="bg-red-50 p-5 rounded-lg shadow-sm border border-red-100">
@@ -163,7 +175,7 @@ const Dashboard: React.FC = () => {
               </Button>
             </div>
           )}
-          
+
           {/* Recent Activities */}
           <div className="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Activities</h3>
