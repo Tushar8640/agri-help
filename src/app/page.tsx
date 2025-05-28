@@ -57,16 +57,19 @@ const Dashboard: React.FC = () => {
   return (
     <div className="pb-20 md:pb-6">
       {/* Stats Overview */}
-      <h1 className="text-3xl font-bold text-center mb-8">My PWA App</h1>
-      <InstallButton />
+      {/* <div>
+        <h1 className="text-3xl font-bold text-center mb-8">My PWA App</h1>
+        <InstallButton />
 
-      <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
-        <InstallPrompt />
-        <PWAStatus />
-        <InstallPrompt />
-      </div>
+        <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
+          <InstallPrompt />
+          <PWAStatus />
+          <InstallPrompt />
 
-      <PushNotificationManager />
+        </div>
+
+        <PushNotificationManager />
+      </div> */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <StatCard
           title="Active Projects"
@@ -145,7 +148,7 @@ const Dashboard: React.FC = () => {
               <h3 className="text-lg font-semibold text-gray-800">Weather</h3>
               <CloudRain className="w-5 h-5 text-blue-500" />
             </div>
-            <WeatherWidget weather={weather} />
+            <WeatherWidget />
           </div>
 
           {/* Risk Alerts */}

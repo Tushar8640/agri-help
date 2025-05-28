@@ -158,8 +158,8 @@ export function InstallPrompt() {
                 <h4 className="font-medium text-blue-900 mb-2">Install on iOS:</h4>
                 <ol className="text-sm text-blue-800 space-y-1">
                   <li>1. Tap the Share button <span className="font-mono bg-blue-100 px-1 rounded">⎋</span></li>
-                  <li>2. Scroll down and tap "Add to Home Screen" <span className="font-mono bg-blue-100 px-1 rounded">➕</span></li>
-                  <li>3. Tap "Add" in the top right corner</li>
+                  <li>2. Scroll down and tap Add to Home Screen <span className="font-mono bg-blue-100 px-1 rounded">➕</span></li>
+                  <li>3. Tap Add in the top right corner</li>
                 </ol>
               </div>
             )}

@@ -12,10 +12,51 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
+  const [city, setCity] = useState('San Francisco');
+  const [weather, setWeather] = useState({
+    city: '',
+    country: '',
+    temperature: 0,
+    condition: '',
+    humidity: 0,
+    feelsLike: 0
+  });
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY'; // Replace with your key
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=dhaka&units=metric&appid=${process.env.NEXT_PUBLIC_OPENWEATHERMAP_API_KEY}`
+        );
+
+        if (!response.ok) {
+          throw new Error('City not found or API error');
+        }
+
+        const data = await response.json();
+
+        setWeather({
+          city: data.name,
+          country: data.sys.country,
+          temperature: Math.round(data.main.temp),
+          condition: data.weather[0].description,
+          humidity: data.main.humidity,
+          feelsLike: Math.round(data.main.feels_like)
+        });
+
+      } catch (err) {
+        console.log(err instanceof Error ? err.message : 'Failed to load weather data');
+      }
+    };
+
+    fetchWeather();
+  }, [city]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -111,7 +152,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div className="flex items-center space-x-4">
               <div className="flex items-center px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
                 <Sun className="w-4 h-4 mr-1" />
-                <span className="text-sm">23°C</span>
+                <span className="text-sm">{weather?.temperature && weather.temperature.toFixed(1)}</span>
                 <Cloud className="w-4 h-4 ml-1" />
               </div>
               <Button className="hidden md:flex items-center px-4 py-2 bg-green-700 text-white rounded-md hover:bg-green-800 transition-colors">

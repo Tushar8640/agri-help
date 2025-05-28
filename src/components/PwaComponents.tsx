@@ -32,6 +32,7 @@ export function PushNotificationManager() {
       setIsSupported(true)
       registerServiceWorker()
       updateSubscriptionCount()
+      console.log('serviceWorker' in navigator && 'PushManager' in window, "Service Worker and PushManager supported")
     }
   }, [])
 
@@ -242,7 +243,7 @@ export function InstallPrompt() {
           <p className="text-blue-800">
             To install this app on your iOS device, tap the share button
             <span role="img" aria-label="share icon" className="mx-1">⎋</span>
-            and then "Add to Home Screen"
+            and then Add to Home Screen
             <span role="img" aria-label="plus icon" className="mx-1">➕</span>
           </p>
         </div>
